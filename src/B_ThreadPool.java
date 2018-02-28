@@ -30,7 +30,7 @@ public class B_ThreadPool {
     }
 
     public static void main(String[] args) {
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 5, 300L, TimeUnit.MICROSECONDS, new SynchronousQueue<>());
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 5, 300L, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<>(5));
         RunA runA = new RunA();
 
         executor.submit(runA);

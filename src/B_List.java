@@ -17,6 +17,8 @@ public class B_List {
 
         Set set = new HashSet<>();
 
+        Map map = new HashMap<>();
+
         System.out.println(args.length);
     }
 }

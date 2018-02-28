@@ -71,7 +71,7 @@ public class B_SortArray {
 //        sort.bubble(nums);
 //        sort.bubble2(nums);
 //        sort.select(nums);
-        sort.insert(nums);
+//        sort.insert(nums);
         System.out.println(Arrays.toString(nums));
     }
 }
