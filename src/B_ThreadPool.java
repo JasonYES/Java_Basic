@@ -1,9 +1,6 @@
 import sun.nio.ch.ThreadPool;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by Fang Yi on 18-1-23.
@@ -31,6 +28,7 @@ public class B_ThreadPool {
 
     public static void main(String[] args) {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 5, 300L, TimeUnit.MICROSECONDS, new ArrayBlockingQueue<>(5));
+
         RunA runA = new RunA();
 
         executor.submit(runA);

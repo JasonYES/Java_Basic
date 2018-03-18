@@ -11,6 +11,12 @@ public class B_SortArray {
 
         //each algorithm is coded in at least two directions, which is a good way to master the core idea of one algorithm
 
+    public void exch(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i]= nums[j];
+        nums[j] = temp;
+    }
+
     public void bubble(int[] nums) {
         int tmp;
         for(int i = nums.length - 1; i>0; i--) {
@@ -63,6 +69,54 @@ public class B_SortArray {
         }
     }
 
+    public int quickPartition(int[] nums, int lo, int hi) {
+        int index = nums[lo];
+        int i = lo; int j = hi + 1;
+        while(true) {
+
+            while(nums[++i] < index) if(i >= hi) break;
+            while(nums[--j] > index) if(j <= lo) break;
+            if(i >= j) break;
+            exch(nums, i, j);
+        }
+        exch(nums, lo, j);
+        return j;
+    }
+    public void quickMain(int[] nums, int i, int j) {
+        if(i >= j) return;
+        int m = quickPartition(nums,i,j);
+        quickMain(nums,i,m-1);
+        quickMain(nums,m+1,j);
+    }
+    public void quick(int[] nums){
+        quickMain(nums, 0, nums.length - 1);
+    }
+
+    int[] tmp = new int[100];
+    public void mergeTwo(int[] nums, int lo, int mid, int hi) {
+
+        int a = lo; int b = mid + 1;
+        for(int i = lo; i <= hi; i++) {
+            tmp[i] = nums[i];
+        }
+        for(int i = lo; i <= hi; i++) {
+            if(a > mid) nums[i] = tmp[b++];
+            else if(b > hi) nums[i] = tmp[a++];
+            else if(tmp[a] >= tmp[b]) nums[i] = tmp[b++];
+            else nums[i] = tmp[a++];
+        }
+    }
+    public void mergeCur(int[] nums, int lo, int hi) {
+        if(lo >= hi) return;
+        int mid = lo + (hi - hi)/2;
+        mergeCur(nums, lo, mid);
+        mergeCur(nums, mid+1, hi);
+        mergeTwo(nums,lo, mid, hi);
+    }
+    public void merge(int[] nums) {
+        mergeCur(nums, 0, nums.length-1);
+    }
+
     public static void main(String[] args) {
 
         B_SortArray sort = new B_SortArray();
@@ -72,6 +126,8 @@ public class B_SortArray {
 //        sort.bubble2(nums);
 //        sort.select(nums);
 //        sort.insert(nums);
+//        sort.quick(nums);
+        sort.merge(nums);
         System.out.println(Arrays.toString(nums));
     }
 }
